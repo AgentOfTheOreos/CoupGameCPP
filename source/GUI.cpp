@@ -157,6 +157,28 @@ void GUI::renderFrame() {
 
     _window.clear(sf::Color::White);
 
+    // Check for a winner
+    try {
+        auto name = _game.winner();   // throws if >1 active
+        // We have a winner! Draw only the victory screen.
+        sf::Text win;
+        win.setFont(_font);
+        win.setCharacterSize(48);
+        win.setFillColor(sf::Color::Red);
+        win.setString("Winner: " + name);
+        // center it roughly:
+        auto bounds = win.getLocalBounds();
+        win.setPosition(
+            (_window.getSize().x - bounds.width) / 2,
+            (_window.getSize().y - bounds.height) / 2
+        );
+        _window.draw(win);
+        _window.display();
+        return;  // skip drawing the rest of the GUI
+    } catch (const std::exception&) {
+        // no winner yet — fall through to normal rendering
+    }
+    
     // Update turn info
     _turnInfo.setString("Turn: " + _game.turn());
 
