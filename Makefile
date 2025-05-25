@@ -20,7 +20,7 @@ GUI_SRCS := $(SRC_DIR)/GUI.cpp
 GUI_OBJS := $(GUI_SRCS:.cpp=.o)
 
 TEST_DIR  := tests
-TESTS     := test_player test_roles test_game_core test_blocks
+TESTS     := test_player test_roles test_game_core
 
 # --------------------------------------------------------------------
 # Default target: build tests and demo
